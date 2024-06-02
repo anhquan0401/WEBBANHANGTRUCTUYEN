@@ -1,0 +1,93 @@
+﻿@model WebApplication1.ViewModels.RegisterVM
+@{
+    ViewData["Title"] = "Đăng Ký";
+}
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6">Đăng kí</h1>
+    <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+        <li class="breadcrumb-item active text-white">Register</li>
+    </ol>
+</div>
+<!-- Single Page Header End -->
+
+<!-- Register start -->
+@* enctype="multipart/form-data": có cái này mới lấy được hình hi up ảnh *@
+<div class="container-fluid py-5">
+    <div style="background: url('../img/hero-img.jpg') !important;">
+        <div class="d-flex justify-content-center" style="margin-left:500px;">
+            <img src="https://media.dau.edu.vn/Media/2_SVDAU/Images/dau-csv12982278-5-e.png">
+        </div>
+        <div class="container py-5" >
+            <h1 class="mb-4 d-flex justify-content-center" style="margin-left:500px;">Đăng Kí</h1>
+            <form asp-action="DangKy" asp-controller="KhachHang" enctype="multipart/form-data">
+                <div class="text-danger" asp-validation-summary="All"></div>
+                <div class="row g-5 justify-content-end">
+                    <div class="col-md-12 col-lg-6 col-xl-7">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-6">
+                                <div class="form-item w-100">
+                                    <label asp-for="@Model.MaKh" class="form-label my-3"></label><sup>*</sup>
+                                    <input asp-for="@Model.MaKh" type="text" class="form-control">
+                                    <span class="text-danger" asp-validation-for="@Model.MaKh"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-6">
+                                <div class="form-item w-100">
+                                    <label asp-for="@Model.MatKhau" class="form-label my-3"></label><sup>*</sup>
+                                    <input asp-for="@Model.MatKhau" type="password" class="form-control">
+                                    <span class="text-danger" asp-validation-for="@Model.MatKhau"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <label asp-for="@Model.HoTen" class="form-label my-3"></label><sup>*</sup>
+                            <input asp-for="@Model.HoTen" type="text" class="form-control">
+                            <span class="text-danger" asp-validation-for="@Model.HoTen"></span>
+                        </div>
+                        <div class="form-item">
+                            <label asp-for="@Model.NgaySinh" class="form-label my-3"></label><sup>*</sup>
+                            <input asp-for="@Model.NgaySinh" type="date" class="form-control">
+                        </div>
+                        <div class="form-item">
+                            <label asp-for="@Model.DienThoai" class="form-label my-3"></label><sup>*</sup>
+                            <input asp-for="@Model.DienThoai" type="tel" class="form-control">
+                            <span class="text-danger" asp-validation-for="@Model.DienThoai"></span>
+                        </div>
+                        <div class="form-item">
+                            <label asp-for="@Model.Email" class="form-label my-3"></label><sup>*</sup>
+                            <input asp-for="@Model.Email" type="email" class="form-control">
+                            <span class="text-danger" asp-validation-for="@Model.Email"></span>
+                        </div>
+                        <div class="form-item">
+                            <label asp-for="@Model.DiaChi" class="form-label my-3"></label><sup>*</sup>
+                            <input asp-for="@Model.DiaChi" type="text" class="form-control" placeholder="House Number Street Name">
+                            <span class="text-danger" asp-validation-for="@Model.DiaChi"></span>
+                        </div>
+                        <div class="form-item">
+                            <label asp-for="@Model.Hinh" class="form-label my-3"></label><sup>*</sup>
+                            <input asp-for="@Model.Hinh" type="file" class="form-control">
+                        </div>
+                        <div class="form-check my-3">
+                            <label asp-for="@Model.GioiTinh" class="form-check-label" for="Account-1">Nam</label>
+                            <input asp-for="@Model.GioiTinh" type="checkbox" class="form-check-input" id="Account-1">
+                        </div>
+                        <div class="row g-4 text-center align-items-center justify-content-center pt-4">
+                            <button type="submit" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Đăng kí</button>
+                        </div>
+
+                        <div class="d-flex justify-content-center text-center" style="margin-top:50px;">
+                            <div class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">
+                                <a asp-action="DangNhap" asp-controller="KhachHang" class="mb-4">Đăng Nhập</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Register end -->
+

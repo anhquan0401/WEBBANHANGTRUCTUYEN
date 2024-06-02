@@ -1,0 +1,100 @@
+﻿@model WebApplication1.Areas.Admin.Models.HangHoaAdminVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">MaHH</label>
+                <input class="form-control" readonly value="@ViewData["MaHH"]" />
+            </div>
+            <div class="form-group">
+                <label asp-for="TenHH" class="control-label"></label>
+                <input asp-for="TenHH" class="form-control" />
+                <span asp-validation-for="TenHH" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenAlias" class="control-label"></label>
+                <input asp-for="TenAlias" class="form-control" />
+                <span asp-validation-for="TenAlias" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaLoai" class="control-label"></label>
+                <select asp-for="MaLoai" class="form-control">
+                    <option value="1000">1000</option>
+                    <option value="1001">1001</option>
+                    <option value="1002">1002</option>
+                    <option value="1003">1003</option>
+                    <option value="1004">1004</option>
+                    <option value="1005">1005</option>
+                    <option value="1006">1006</option>
+                    <option value="1007">1007</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoTaDonVi" class="control-label"></label>
+                <input asp-for="MoTaDonVi" class="form-control" />
+                <span asp-validation-for="MoTaDonVi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DonGia" class="control-label"></label>
+                <input asp-for="DonGia" class="form-control" />
+                <span asp-validation-for="DonGia" class="text-danger"></span>
+            </div>
+            <div class="row mb-3">
+                <div class="offset-sm-4 col-sm-8">
+                    <img src="/Hinh/HangHoa/@ViewData["ImgaeFileName"]" width="150" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hinh" class="control-label"></label>
+                <input asp-for="Hinh" class="form-control" />
+                <span asp-validation-for="Hinh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiamGia" class="control-label"></label>
+                <input asp-for="GiamGia" class="form-control" />
+                <span asp-validation-for="GiamGia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoLanXem" class="control-label"></label>
+                <input asp-for="SoLanXem" class="form-control" />
+                <span asp-validation-for="SoLanXem" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoTa" class="control-label"></label>
+                <input asp-for="MoTa" class="form-control" />
+                <span asp-validation-for="MoTa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">NgaySX</label>
+                <input class="form-control" readonly value="@ViewData["NgaySX"]" />
+            </div>
+            <div class="form-group">
+                <label asp-for="MaNcc" class="control-label"></label>
+                <select asp-for="MaNcc" class="form-control">
+                    <option value="AP">AP</option>
+                    <option value="AP">AP</option>
+                    <option value="NK">NK</option>
+                    <option value="SM">SM</option>
+                    <option value="SS">SS</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,25 @@
+﻿@model IEnumerable<WebApplication1.ViewModels.HangHoaVM>
+@foreach (var item in Model)
+{   
+    <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="rounded position-relative fruite-item"> 
+            <div class="fruite-img">
+                <a asp-controller="Shop" asp-action="Details" asp-route-id="@item.MaHH">
+                    <img src="~/Hinh/HangHoa/@item.Img" class="img-fluid w-100 rounded-top" alt="@item.TenHH">
+                </a>
+            </div>
+            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                <a asp-controller="Shop" asp-action="Details" asp-route-id="@item.MaHH">
+                    <h4>@item.TenHH</h4>
+                </a>
+                <p>SL: @item.Soluong</p>
+                <p>San Pham</p>
+                <div class="d-flex justify-content-between flex-lg-wrap">
+                    <p class="text-dark fs-5 fw-bold mb-0">@item.DonGia$</p>
+                    <a asp-action="AddToCart" asp-controller="Cart" asp-route-id="@item.MaHH" class="btn border border-secondary rounded-pill px-3 text-dark"><i class="fa fa-shopping-bag me-2 text-dark"></i> Add to cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

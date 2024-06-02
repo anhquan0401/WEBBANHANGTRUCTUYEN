@@ -1,0 +1,41 @@
+﻿
+<form asp-action="Search" asp-controller="Shop" method="get">
+    <div class="input-group w-100 mx-auto d-flex">
+        <input id="txtKeyword" type="text" class="form-control" style="padding-right:120vh" placeholder="keywords" aria-describedby="search-icon-1" name="query">
+        <button type="submit" style="border: none !important; border-top-right-radius: 10px;  border-bottom-right-radius: 10px;">
+            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+        </button>
+    </div>
+</form>
+
+@section Scripts {
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#txtKeyword").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '/Shop/SuggestSearch/',
+                        data: { 'query': request.term },
+                        dataType:"json",
+                        type: "GET"
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return item;
+                            }))},
+                    });
+                },
+                minLength:1
+            });
+        });
+
+
+    </script>
+}
+
+
+
+
+
+

@@ -1,0 +1,20 @@
+﻿@model IEnumerable<WebApplication1.ViewModels.HangHoaVM>
+<form asp-action="Details" asp-controller="Shop">
+    <div class="input-group w-100 mx-auto d-flex mb-4">
+        <div class="tt-menu tt-open" style="border-radius: 10px;">
+            <div class="tt-dataset tt-dataset-states">
+                <div class="man-section tt-suggestion tt-selectable">
+                    @foreach (var i in Model)
+                    {
+                        <div class="description-section">
+                            <h1>@i.TenHH</h1>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+

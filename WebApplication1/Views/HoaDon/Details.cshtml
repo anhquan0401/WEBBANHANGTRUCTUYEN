@@ -1,0 +1,97 @@
+﻿@model WebApplication1.ViewModels.LichSuHoaDonVM
+
+@{
+    ViewData["Title"] = "Chi tiết hóa đơn";
+}
+
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6">Lịch Sử đặt hàng</h1>
+    <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+        <li class="breadcrumb-item active text-white">Lịch sử đặt hàng</li>
+    </ol>
+</div>
+<!-- Single Page Header End -->
+
+<div class="container mt-5" style="width: 500px;">
+    <div class="card" style="margin-bottom: 35px;">
+        <div class="card-header">
+            <h3 class="card-title" style="text-align:center; margin-top: 10px;">Đơn mua</h3>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Mã hóa đơn: @Model.MaHd</h5>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Ngày đặt: @Model.NgayDat</h5>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Ngày giao: @Model.NgayGiao</h5>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Họ tên: @Model.HoTen</h5>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Điện thoại: @Model.DienThoai</h5>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Địa chỉ: @Model.DiaChi</h5>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Cách thanh toán: @Model.CachThanhToan</h5>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Cách vận chuyển: @Model.CachVanChuyen</h5>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Phí vận chuyển: @Model.PhiVanChuyen</h5>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Tổng tiền: @Model.TongTien.ToString("#,##").Replace(',', '.')$</h5>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Trạng thái: @Model.TrangThai || @Model.NgayCapNhat</h5>
+        </div>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Tên hàng hóa</th>
+            <th scope="col">Hình</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Đơn giá</th>
+            <th scope="col">Giảm giá</th>
+            <th scope="col">Thành tiền</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var chiTiet in Model.ChiTietHds)
+        {
+            <tr>
+                <td>
+                    <p class="mb-0 mt-4">@chiTiet.TenHh</p>
+                </td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <img src="~/Hinh/HangHoa/@chiTiet.Hinh" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                    </div>
+                </td>
+                <td>
+                    <p class="mb-0 mt-4">@chiTiet.SoLuong</p>
+                </td>
+                <td>
+                    <p class="mb-0 mt-4">@chiTiet.DonGia.ToString("#,##").Replace(',', '.')$</p>
+                </td>
+                <td>
+                    <p class="mb-0 mt-4">@chiTiet.GiamGia.ToString("C")</p>
+                </td>
+                <td>
+                    <p class="mb-0 mt-4">@chiTiet.ThanhTien.ToString("#,##").Replace(',', '.')$</p>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

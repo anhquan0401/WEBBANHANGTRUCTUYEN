@@ -1,0 +1,78 @@
+﻿@model IEnumerable<WebApplication1.Areas.Admin.Models.KhachHangAdminVM>
+
+@{
+    ViewData["Title"] = "Danh sách người dùng";
+}
+
+<p>
+    <a asp-action="Create">Thêm người dùng</a>
+</p>
+
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Hình</th>
+                        <th scope="col">Họ và tên</th>
+                        <th scope="col">Giới tính</th>
+                        <th scope="col">Ngày sinh</th>
+                        <th scope="col">Địa chỉ</th>
+                        <th scope="col">Điện thoại</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Mật khẩu</th>
+                        <th scope="col">Hiệu lực</th>
+                        <th scope="col">Vài trò</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">
+                                <div class="d-flex align-items-center">
+                                    <img src="~/Hinh/KhachHang/@item.FileHinh" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                                </div>
+                            </th>
+                            <td>
+                                <p class="mb-0 mt-4">@item.HoTen</p>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4">@item.GioiTinh</p>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4">@item.NgaySinh</p>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4">@item.DiaChi</p>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4">@item.DienThoai</p>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4">@item.Email</p>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4">@item.MatKhau</p>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4">@item.HieuLuc</p>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4">@item.VaiTro</p>
+                            </td>
+                            <th scope="row">
+                                <a asp-action="Edit" asp-route-id="@item.MaKh">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.MaKh">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.MaKh">Delete</a>
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
