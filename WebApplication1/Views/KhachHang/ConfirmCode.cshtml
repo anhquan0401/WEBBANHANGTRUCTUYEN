@@ -1,0 +1,52 @@
+﻿@model WebApplication1.ViewModels.ConfirmCodeVM
+@{
+    ViewData["Title"] = "Xác nhận mã";
+}
+
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6">Xác nhận mã</h1>
+    <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+        <li class="breadcrumb-item active text-white">Xác nhận mã</li>
+    </ol>
+</div>
+<!-- Single Page Header End -->
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success">@ViewBag.Message</div>
+}
+
+<!-- Forgot password start -->
+@* enctype="multipart/form-data": có cái này mới lấy được hình hi up ảnh *@
+<div class="container-fluid py-5">
+    <div style="background: url('../img/hero-img.jpg') !important;">
+        <div class="container py-5">
+            <h1 class="mb-4 d-flex justify-content-center">Xác nhận mã</h1>
+            <form asp-action="ConfirmCode" asp-controller="KhachHang" enctype="multipart/form-data">
+                <div class="row g-5">
+                    <div class="col-md-12 col-lg-6 col-xl-7">
+                        <div class="form-item">
+                            <label asp-for="@Model.Code" class="form-label my-3"></label><sup>*</sup>
+                            <input asp-for="@Model.Code" type="text" class="form-control">
+                            <span class="text-danger" asp-validation-for="@Model.Code"></span>
+                        </div>
+                        <div class="form-item">
+                            <label asp-for="@Model.NewPassWord" class="form-label my-3"></label><sup>*</sup>
+                            <input asp-for="@Model.NewPassWord" type="password" class="form-control">
+                            <span class="text-danger" asp-validation-for="@Model.NewPassWord"></span>
+                        </div>
+                        <div class="form-group btn">
+                            <input type="submit" value="Xác nhận" class="btn btn-default btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Forgot password end -->
+
+
+

@@ -1,6 +1,30 @@
 ﻿(function ($) {
     "use strict";
 
+    // Khởi tạo ScrollReveal với các tùy chọn chung
+    const sr = ScrollReveal({
+        origin: 'top',
+        distance: '60px',
+        duration: 2500,
+        delay: 400,
+        reset: false // Điều này sẽ làm cho hiệu ứng tái diễn khi cuộn lên/xuống
+    });
+
+    // Áp dụng hiệu ứng cho các phần tử
+    sr.reveal('.top-info', { origin: 'left' });
+    sr.reveal('.top-link', { origin: 'right' });
+    sr.reveal('.fa-user', { delay: 700});
+    sr.reveal('.footer', { origin: 'bottom' });
+    sr.reveal(`h4`, { delay: 200 });
+    sr.reveal(`h2`, { delay: 300 });
+    sr.reveal(`h1`, { delay: 400 });
+    sr.reveal(`p`, { delay: 500 });
+    sr.reveal(`.fe-box`, { origin: 'top' });
+    sr.reveal(`.pro`, { opacity: 0.2 })
+    sr.reveal(`.banner-box`, { origin: 'left' });
+    sr.reveal(`.banner-box2`, { origin: 'right' });
+
+
     // Spinner
     var spinner = function () {
         setTimeout(function () {

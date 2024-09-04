@@ -246,13 +246,16 @@ namespace WebApplication1.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Admin/HangHoaAdmin/Delete/5
+        // POST: Admin/HangHoaAdmin/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
+
+            var comment = _context.Commentss.Where(c => c.MaHh == id);
+            _context.Commentss.RemoveRange(comment);
 
             var hangHoa = await _context.HangHoas.FindAsync(id);
 

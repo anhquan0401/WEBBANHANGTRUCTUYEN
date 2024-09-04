@@ -62,7 +62,12 @@ namespace WebApplication1.Areas.Admin.Controllers
                                             claims, "AdminCookies");
                             var claimPrincipal = new ClaimsPrincipal(claimsIdentity);
 
-                            await HttpContext.SignInAsync("AdminCookies", claimPrincipal);
+                            var authProperties = new AuthenticationProperties
+                            {
+                                IsPersistent = true, // Giữ cookie sau khi đóng trình duyệt
+                            };
+
+                        await HttpContext.SignInAsync("AdminCookies", claimPrincipal, authProperties);
 
                             if (Url.IsLocalUrl(ReturnURL))
                             {

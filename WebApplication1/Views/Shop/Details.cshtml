@@ -1,6 +1,8 @@
 ﻿@model WebApplication1.ViewModels.ChiTietHangHoaVM
 @{
     ViewData["Title"] = "Details";
+    var total = ViewBag.AverageTotal;
+    var countSold = ViewBag.Sold;
 }
 
 <!-- Single Page Header start -->
@@ -31,13 +33,17 @@
                         <h4 class="fw-bold mb-3">@Model.TenHH</h4>
                         <p class="mb-3">Số lượng: @Model.Soluong</p>
                         <p class="mb-3">Category: @Model.TenLoai</p>
-                        <h5 class="fw-bold mb-3">(@Model.DonGia)$</h5>
+                        <div class="nav mb-3">
+                            <h5 class="fw-bold mb-3">(@Model.DonGia)$</h5>
+                            <p class="ms-5">Đã bán: @countSold</p>
+                        </div>
                         <div class="d-flex mb-4">
                             <i class="fa fa-star text-secondary"></i>
                             <i class="fa fa-star text-secondary"></i>
                             <i class="fa fa-star text-secondary"></i>
                             <i class="fa fa-star text-secondary"></i>
                             <i class="fa fa-star"></i>
+                            <p class="ms-2">@total</p>
                         </div>                  
                         <p class="mb-4">@Model.MoTa</p>
                         <form asp-action="AddToCart" asp-controller="Cart" asp-route-id="@Model.MaHH">
@@ -79,90 +85,66 @@
                                 </p>                               
                             </div>
                             <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
-                                <div class="d-flex">
-                                    <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
-                                    <div class="">
-                                        <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                        <div class="d-flex justify-content-between">
-                                            <h5>Jason Smith</h5>
-                                            <div class="d-flex mb-3">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
+                                @if(Model.Commentss != null && Model.Commentss.Count() > 0)
+                                {
+                                    @foreach(var comment in Model.Commentss)
+                                    {
+                                        <div class="d-flex">
+                                            <img src="~/Hinh/KhachHang/@comment.MaKhNavigation.Hinh" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
+                                            <div class="">
+                                                <p class="mb-2" style="font-size: 14px;">@comment.CommentDate</p>
+                                                <div class="d-flex justify-content-between">
+                                                    <h5>@comment.MaKhNavigation.HoTen</h5>
+                                                    <div class="d-flex mb-3">
+                                                        @for(int i = 0; i < 5; i++)
+                                                        {
+                                                            if(i < comment.Rating)
+                                                            {                                                          
+                                                                <i class="fas fa-star text-secondary"></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i class="fas fa-star"></i>                                                                                                                     
+                                                            }
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <p>
+                                                    @comment.CommentDescription
+                                                </p>
                                             </div>
                                         </div>
-                                        <p>
-                                            The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic
-                                            words etc. Susp endisse ultricies nisi vel quam suscipit
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="d-flex">
-                                    <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
-                                    <div class="">
-                                        <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                        <div class="d-flex justify-content-between">
-                                            <h5>Sam Peters</h5>
-                                            <div class="d-flex mb-3">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <p class="text-dark">
-                                            The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic
-                                            words etc. Susp endisse ultricies nisi vel quam suscipit
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="nav-vision" role="tabpanel">
-                                <p class="text-dark">
-                                    Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
-                                    amet diam et eos labore. 3
-                                </p>
-                                <p class="mb-0">
-                                    Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore.
-                                    Clita erat ipsum et lorem et sit
-                                </p>
+                                    }
+                                }
+                                else
+                                {
+                                    <p>Chưa có bình luận nào. Hãy là người đầu tiên để lại đánh giá!</p>
+                                }
                             </div>
                         </div>
                     </div>
-                    <form action="#">
+                    <form asp-action="Details" asp-controller="Shop">
                         <h4 class="mb-5 fw-bold">Leave a Reply</h4>
                         <div class="row g-4">
-                            <div class="col-lg-6">
-                                <div class="border-bottom rounded">
-                                    <input type="text" class="form-control border-0 me-4" placeholder="Yur Name *">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="border-bottom rounded">
-                                    <input type="email" class="form-control border-0" placeholder="Your Email *">
-                                </div>
-                            </div>
                             <div class="col-lg-12">
                                 <div class="border-bottom rounded my-4">
-                                    <textarea name="" id="" class="form-control border-0" cols="30" rows="8" placeholder="Your Review *" spellcheck="false"></textarea>
+                                    <textarea name="comment" class="form-control border-0" cols="30" rows="8" placeholder="Your Review *" spellcheck="false"></textarea>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="d-flex justify-content-between py-3 mb-5">
                                     <div class="d-flex align-items-center">
                                         <p class="mb-0 me-3">Please rate:</p>
-                                        <div class="d-flex align-items-center" style="font-size: 12px;">
-                                            <i class="fa fa-star text-muted"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
+                                        <div class="d-flex align-items-center text-warning" style="font-size: 12px;">
+                                            <i class="ratingStar fas fa-star" data-value="1"></i>
+                                            <i class="ratingStar far fa-star" data-value="2"></i>
+                                            <i class="ratingStar far fa-star" data-value="3"></i>
+                                            <i class="ratingStar far fa-star" data-value="4"></i>
+                                            <i class="ratingStar far fa-star" data-value="5"></i>
                                         </div>
                                     </div>
-                                    <a href="#" class="btn border border-secondary text-primary rounded-pill px-4 py-3"> Post Comment</a>
+                                    <input type="hidden" name="Rating" id="ratingsValue" value="1"/>
+                                    <button type="submit" class="btn border border-secondary text-primary rounded-pill px-4 py-3">Đăng</button>
                                 </div>
                             </div>
                         </div>
@@ -420,6 +402,17 @@
     </div>
 </div>
 <!-- Single Product End -->
+@section Scripts {
+    <script>
+        $(document).on('click', '.ratingStar', function () {
+            $(".ratingStar").addClass("far").removeClass("fas");
+            $(this).addClass("fas").removeClass("far");
+            $(this).prevAll(".ratingStar").addClass("fas").removeClass("far");
+            var starValue = $(this).attr("data-value");
+            $("#ratingsValue").val(starValue);
+        });
+    </script>
+}
 
 
 

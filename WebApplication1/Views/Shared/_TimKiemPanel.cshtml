@@ -1,38 +1,101 @@
-﻿
-<form asp-action="Search" asp-controller="Shop" method="get">
+﻿<form asp-action="Search" asp-controller="Shop" method="post" autocomplete="off">
     <div class="input-group w-100 mx-auto d-flex">
-        <input id="txtKeyword" type="text" class="form-control" style="padding-right:120vh" placeholder="keywords" aria-describedby="search-icon-1" name="query">
+        <input type="text" id="searchBox" class="form-control" style="padding-right:120vh" placeholder="Seach products......" aria-describedby="search-icon-1" name="query">
+        <div id="suggestionsBox" class="list-group position-absolute w-100" style="z-index: 1000;"></div>
         <button type="submit" style="border: none !important; border-top-right-radius: 10px;  border-bottom-right-radius: 10px;">
             <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
         </button>
     </div>
 </form>
 
-@section Scripts {
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            $("#txtKeyword").autocomplete({
-                source: function (request, response) {
+
+
+@* @section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#searchBox').on('input', function () {
+                const query = $(this).val();
+                if (query.length > 2) {
                     $.ajax({
-                        url: '/Shop/SuggestSearch/',
-                        data: { 'query': request.term },
-                        dataType:"json",
-                        type: "GET"
+                        url: '/Shop/SuggestSearch',
+                        type: 'GET',
+                        data: { query: query },
                         success: function (data) {
-                            response($.map(data, function (item) {
-                                return item;
-                            }))},
+                            $('#suggestions').html(data);
+                            $('#suggestions').show();
+                        },
+                        error: function () {
+                            $('#suggestions').empty();
+                        }
                     });
-                },
-                minLength:1
+                } else {
+                    $('#suggestions').empty();
+                }
             });
         });
 
+    </script>
+} *@
 
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Xử lý sự kiện nhập liệu trong ô tìm kiếm
+            $('#searchBox').on('keyup', function () {
+                let query = $(this).val();
+                if (query.length >= 2) {
+                    $.ajax({
+                        url: '@Url.Action("SuggestSearch", "Shop")',
+                        type: 'GET',
+                        data: { query: query },
+                        success: function (data) {
+                            $('#suggestionsBox').empty();
+                            if (data.length > 0) {
+                                $.each(data, function (i, item) {
+                                    $('#suggestionsBox').append(
+                                        `<a href="/Shop/Details/${item.maHh}" class="list-group-item list-group-item-action">
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="/Hinh/HangHoa/${item.hinh}" alt="${item.tenHh}" width="50" height="50" class="me-3"/>
+                                                        <div>
+                                                            <h6 class="mb-0">${item.tenHh}</h6>
+                                                            <small class="text-muted">${item.donGia.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</small>
+                                                        </div>
+                                                    </div>
+                                                </a>`
+                                    );
+                                });
+                            } else {
+                                $('#suggestionsBox').append(
+                                    `<div class="list-group-item">Không tìm thấy sản phẩm phù hợp.</div>`
+                                );
+                            }
+                        }
+                    });
+                } else {
+                    $('#suggestionsBox').empty();
+                }
+            });
+
+            // Ẩn gợi ý khi click ra ngoài
+            $(document).click(function (e) {
+                if (!$(e.target).closest('#searchBox').length) {
+                    $('#suggestionsBox').empty();
+                }
+            });
+
+            // // Xử lý submit form tìm kiếm
+            // $('#searchForm').on('submit', function (e) {
+            //     e.preventDefault();
+            //     let query = $('#searchBox').val();
+            //     if (query.trim() !== '') {
+            //         window.location.href = '/Shop/Search?query=' + encodeURIComponent(query);
+            //     }
+            // });
+        });
     </script>
 }
+
 
 
 

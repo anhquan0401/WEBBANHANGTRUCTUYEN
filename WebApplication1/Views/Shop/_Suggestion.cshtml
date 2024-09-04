@@ -1,0 +1,25 @@
+﻿@model IEnumerable<WebApplication1.Data.HangHoa>
+
+@if(Model != null && Model.Any())
+{
+    <div class="input-group w-100 mx-auto d-flex mb-4">
+        <div class="tt-menu tt-open" style="border-radius: 10px;">
+            <div class="tt-dataset tt-dataset-states">
+                <div class="man-section tt-suggestion tt-selectable">
+                    @foreach (var i in Model)
+                    {
+                        <div class="description-section">
+                            <a asp-controller="Shop" asp-action="Details" asp-route-id="@i.MaHh">@i.TenHh</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <p>Không có sản phẩm phù hợp.</p>
+}
+
+

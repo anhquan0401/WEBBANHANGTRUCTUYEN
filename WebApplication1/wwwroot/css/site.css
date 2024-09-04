@@ -41,3 +41,47 @@ body {
     color: #000000 !important;
 }
 
+.form-control1 {
+    width: 70%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #747d88;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 10px;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.suggestion-list {
+    border: 1px solid #ccc;
+    background-color: white;
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.suggestion-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+    .suggestion-item a {
+        text-decoration: none;
+        color: black;
+        display: block;
+    }
+
+    .suggestion-item:hover {
+        background-color: #f0f0f0;
+    }
+
+
+

@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 using System.Security.Claims;
 using WebApplication1.Data;
 using WebApplication1.Helpers;
+using WebApplication1.Repository.Interface;
+using WebApplication1.Repository.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,9 @@ builder.Services.AddDbContext<EcommerceContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("HShop"));
 });
+
+// cycle life DJ:
+builder.Services.AddTransient<IMyEmailSender, MyEmailSender>();
 
 // session để lưu đơn hàng trên server
 builder.Services.AddDistributedMemoryCache();
@@ -30,8 +36,6 @@ builder.Services.AddDistributedMemoryCache();
 //            //options.LoginPath = "/Admin/AccountAdmin/LoginAdmin";
 //            options.AccessDeniedPath = "/AccessDenied"; // nếu user đó ko có quyền truy cập thì sẽ chuyển tới trang AccessDenied vd như thông báo lỗi
 //        });
-
-
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -41,15 +45,22 @@ builder.Services.AddAuthentication(options =>
         options =>
         {
             options.LoginPath = "/KhachHang/DangNhap";
-            //options.LoginPath = "/Admin/AccountAdmin/LoginAdmin";
             options.AccessDeniedPath = "/AccessDenied"; // nếu user đó ko có quyền truy cập thì sẽ chuyển tới trang AccessDenied vd như thông báo lỗi
             options.Cookie.Name = "UserAuthCookie";
+            options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // mỗi lần người dùng request thì sẽ tạo mới thêm 30 phút
+            options.SlidingExpiration = true; // Làm mới thời gian hết hạn mỗi khi có request
+            options.Cookie.HttpOnly = true;
+            options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
         })
     .AddCookie("AdminCookies", options =>
     {
         options.LoginPath = "/Admin/AccountAdmin/LoginAdmin";
         options.AccessDeniedPath = "/Admin/AccessDenied";
         options.Cookie.Name = "AdminAuthCookie";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        options.Cookie.HttpOnly = true;
+        options.SlidingExpiration = true; 
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     });
 
 

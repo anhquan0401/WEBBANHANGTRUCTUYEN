@@ -9,6 +9,8 @@ public partial class KhachHang
 
     public string? MatKhau { get; set; }
 
+    public string? HashMatKhau { get; set; }
+
     public string HoTen { get; set; } = null!;
 
     public bool GioiTinh { get; set; }
@@ -27,6 +29,8 @@ public partial class KhachHang
 
     public int VaiTro { get; set; }
 
+    public string? ResetCode { get; set; }
+
     public string? RandomKey { get; set; }
 
     public virtual ICollection<BanBe> BanBes { get; set; } = new List<BanBe>();
@@ -34,4 +38,6 @@ public partial class KhachHang
     public virtual ICollection<HoaDon> HoaDons { get; set; } = new List<HoaDon>();
 
     public virtual ICollection<YeuThich> YeuThiches { get; set; } = new List<YeuThich>();
+
+    public virtual ICollection<Comments> Commentss { get; set; } = new List<Comments>();
 }

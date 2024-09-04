@@ -1,4 +1,6 @@
-﻿namespace WebApplication1.ViewModels
+﻿using WebApplication1.Data;
+
+namespace WebApplication1.ViewModels
 {
     public class ChiTietHangHoaVM
     {
@@ -12,6 +14,8 @@
         public string? MoTa { get; set; }
         public string? ChiTiet { get; set; }
         public int SoLuongTon { get; set; }
+
+        public virtual ICollection<Comments> Commentss { get; set; } = new List<Comments>();
     }
 }
 

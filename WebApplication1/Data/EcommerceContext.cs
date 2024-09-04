@@ -21,6 +21,8 @@ public partial class EcommerceContext : DbContext
 
     public virtual DbSet<ChuDe> ChuDes { get; set; }
 
+    public virtual DbSet<Comments> Commentss { get; set; }
+
     public virtual DbSet<GopY> Gopies { get; set; }
 
     public virtual DbSet<HangHoa> HangHoas { get; set; }
@@ -76,6 +78,7 @@ public partial class EcommerceContext : DbContext
 
             entity.HasOne(d => d.MaHhNavigation).WithMany(p => p.BanBes)
                 .HasForeignKey(d => d.MaHh)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_QuangBa_HangHoa");
 
             entity.HasOne(d => d.MaKhNavigation).WithMany(p => p.BanBes)
@@ -123,6 +126,33 @@ public partial class EcommerceContext : DbContext
                 .HasForeignKey(d => d.MaNv)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_ChuDe_NhanVien");
+        });
+
+        modelBuilder.Entity<Comments>(entity =>
+        {
+            entity.HasKey(e => e.CommentID).HasName("PK_Comments");
+
+            entity.ToTable("Comments");
+
+            entity.Property(e => e.MaHh).HasColumnName("MaHH");
+            entity.Property(e => e.MaKh)
+                .HasMaxLength(20)
+                .HasColumnName("MaKH");
+            entity.Property(e => e.CommentDescription)
+                .HasMaxLength(250)
+                .HasColumnName("CommentDescription");
+            entity.Property(e => e.Rating).HasColumnName("Rating");
+            entity.Property(e => e.CommentDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.HasOne(d => d.MaKhNavigation).WithMany(p => p.Commentss)
+                .HasForeignKey(d => d.MaKh)
+                .HasConstraintName("FK_Comment_Customers");
+
+            entity.HasOne(d => d.MaHhNavigation).WithMany(p => p.Commentss)
+                .HasForeignKey(d => d.MaHh)
+                .HasConstraintName("FK_Comment_Products");
         });
 
         modelBuilder.Entity<GopY>(entity =>
@@ -270,9 +300,13 @@ public partial class EcommerceContext : DbContext
                 .HasDefaultValue("Photo.gif");
             entity.Property(e => e.HoTen).HasMaxLength(50);
             entity.Property(e => e.MatKhau).HasMaxLength(50);
+            entity.Property(e => e.HashMatKhau).HasMaxLength(50);
             entity.Property(e => e.NgaySinh)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.ResetCode)
+                .HasMaxLength(50)
+                .IsUnicode(false);
             entity.Property(e => e.RandomKey)
                 .HasMaxLength(50)
                 .IsUnicode(false);

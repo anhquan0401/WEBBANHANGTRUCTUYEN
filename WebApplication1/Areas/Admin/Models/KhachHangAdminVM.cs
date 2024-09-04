@@ -7,10 +7,6 @@ namespace WebApplication1.Areas.Admin.Models
         [Display(Name = "Tên đăng nhập")]
         public string MaKh { get; set; } = null!;
 
-        [Display(Name = "Mật Khẩu")]
-        [Required(ErrorMessage = "Bạn chưa nhập mật khẩu")]
-        public string MatKhau { get; set; }
-
         [Display(Name = "Họ và Tên")]
         [Required(ErrorMessage = "Bạn chưa nhập tên của bạn")]
         [MaxLength(50, ErrorMessage = "Tối đa 50 kí tự")]

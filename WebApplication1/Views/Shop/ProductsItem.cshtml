@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<WebApplication1.ViewModels.HangHoaVM>
-
+@{
+    var countSold = ViewBag.Sold;
+}
 @foreach (var item in Model)
 {
     <div class="col-md-6 col-lg-6 col-xl-4">
@@ -17,6 +19,7 @@
                 <p>San pham</p>
                 <div class="d-flex justify-content-between flex-lg-wrap">
                     <p class="text-dark fs-5 fw-bold mb-0">$(@item.DonGia)</p>
+                    <p class="text-dark fs-5 fw-bold mb-0">@countSold</p>
                     <a asp-action="AddToCart" asp-controller="Cart" asp-route-id="@item.MaHH" class="btn border border-secondary rounded-pill px-3 text-dark"><i class="fa fa-shopping-bag me-2 text-dark"></i> Add to cart</a>
                 </div>
             </div>

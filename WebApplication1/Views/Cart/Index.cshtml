@@ -4,7 +4,7 @@
 }
 
 <!-- Single Page Header start -->
-<div class="container-fluid page-header py-5">
+<div class="container-fluid page-header py-5" style="background: url('../img/b1.jpg') !important;">
     <h1 class="text-center text-white display-6">Cart</h1>
     <ol class="breadcrumb justify-content-center mb-0">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -81,10 +81,6 @@
                 </tbody>
             </table>
         </div>
-        <div class="mt-5">
-            <input type="text" class="border-0 border-bottom rounded me-5 py-3 mb-4" placeholder="Coupon Code">
-            <button class="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">Apply Coupon</button>
-        </div>
         <div class="row g-4 justify-content-end">
             <div class="col-8"></div>
             <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
@@ -98,16 +94,15 @@
                         <div class="d-flex justify-content-between">
                             <h5 class="mb-0 me-4">Shipping</h5>
                             <div class="">
-                                <p class="mb-0">Flat rate: $0.00</p>
+                                <p class="mb-0">Flat rate: 0đ</p>
                             </div>
                         </div>
-                        <p class="mb-0 text-end">Shipping to Ukraine.</p>
                     </div>
                     <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
                         <h5 class="mb-0 ps-4 me-4">Total</h5>
                         <p class="mb-0 pe-4">@Model.Sum(p => p.ThanhTien).ToString("#,##").Replace(',','.')$</p>
                     </div>
-                    <a asp-action="Checkout" asp-controller="Cart" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4">Mua Hàng</a>
+                    <a asp-action="Checkout" asp-controller="Cart" class="btn border-secondary rounded-pill px-4 py-3 text-dark text-uppercase mb-4 ms-4">Mua Hàng</a>
                 </div>
             </div>
         </div>

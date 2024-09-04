@@ -1,0 +1,72 @@
+﻿@model WebApplication1.ViewModels.ProFileVM
+@{
+    ViewData["Title"] = "Chỉnh Sửa Thông Tin Cá Nhân";
+}
+
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6">Chỉnh sửa thông tin cá nhân</h1>
+    <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+        <li class="breadcrumb-item active text-white">ProFile</li>
+    </ol>
+</div>
+<!-- Single Page Header End -->
+
+<div class="container mt-5" style="width: 1000px;">
+    <div class="card" style="margin-bottom: 35px;">
+        <form asp-action="editFrofile" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="card-header">
+                <h3 class="card-title" style="text-align:center; margin-top: 10px;">Thông Tin Cá Nhân</h3>
+            </div>
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <img src="/Hinh/KhachHang/@ViewData["ImgaeFileName"]" class="img-fluid me-5 rounded-circle" style="width: 150px; height: 150px;" alt="">
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <input asp-for="Hinh" type="file" class="form-control1" />
+                </div>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Tên đăng nhập: <input asp-for="MaKh" class="form-control1" readonly /></h5>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Họ và tên: <input asp-for="HoTen" type="text" class="form-control1" placeholder="Họ và tên"></h5>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                    Giới tính:
+                    <select asp-for="GioiTinh" class="form-control1" placeholder="Giới tính">
+                        <option value="True">Nam</option>
+                        <option value="False">Nữ</option>
+                    </select>
+                </h5>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Ngày sinh: <input asp-for="NgaySinh" type="date" class="form-control1" /></h5>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Địa chỉ: <input asp-for="DiaChi" class="form-control1" /></h5>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Điện thoại: <input asp-for="DienThoai" class="form-control1" /></h5>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Email: <input asp-for="Email" class="form-control1" /></h5>
+            </div>
+            <div class="form-group btn">
+                <input type="submit" value="Save" class="btn btn-default btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div>
+        <a asp-action="proFile">Back to List</a>
+    </div>
+</div>
+
+
+

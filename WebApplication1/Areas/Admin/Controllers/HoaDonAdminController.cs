@@ -157,7 +157,6 @@ namespace WebApplication1.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MaHd,MaKh,NgayDat,NgayCan,NgayGiao,HoTen,DiaChi,DienThoai,CachThanhToan,CachVanChuyen,PhiVanChuyen,MaTrangThai,MaNv,GhiChu")] HoaDon hoaDon)
         {
             if (ModelState.IsValid)
@@ -267,6 +266,9 @@ namespace WebApplication1.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var chiTietHds = _context.ChiTietHds.Where(ct => ct.MaHd == id);
+            _context.ChiTietHds.RemoveRange(chiTietHds);
+
             var hoaDon = await _context.HoaDons.FindAsync(id);
             if (hoaDon != null)
             {

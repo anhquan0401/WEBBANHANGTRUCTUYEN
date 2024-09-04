@@ -38,7 +38,6 @@ namespace WebApplication1.Areas.Admin.Controllers
             var results = khachHangs.Select(kh => new KhachHangAdminVM 
             {
                 MaKh = kh.MaKh,
-                MatKhau = kh.MatKhau,
                 HoTen = kh.HoTen,
                 GioiTinh = kh.GioiTinh,
                 NgaySinh = kh.NgaySinh,
@@ -109,7 +108,6 @@ namespace WebApplication1.Areas.Admin.Controllers
                 KhachHang khachHangs = new KhachHang()
                 {
                     MaKh = model.MaKh,
-                    MatKhau = model.MatKhau.ToMd5Hash(randomKey),
                     HoTen = model.HoTen,
                     GioiTinh = model.GioiTinh,
                     NgaySinh = model.NgaySinh ?? DateTime.Now,
@@ -146,7 +144,6 @@ namespace WebApplication1.Areas.Admin.Controllers
             var khachHangAdminVM = new KhachHangAdminVM()
             {
                 MaKh = khachHangs.MaKh,
-                MatKhau = khachHangs.MatKhau,
                 HoTen = khachHangs.HoTen,
                 GioiTinh = khachHangs.GioiTinh,
                 NgaySinh = khachHangs.NgaySinh,
@@ -211,13 +208,6 @@ namespace WebApplication1.Areas.Admin.Controllers
                 khachHang.HieuLuc = model.HieuLuc;
                 khachHang.VaiTro = model.VaiTro;
 
-                if (!string.IsNullOrEmpty(model.MatKhau))
-                {
-                    string randomKey = MyUtil.GenerateRandomKey();
-                    khachHang.RandomKey = randomKey;
-                    khachHang.MatKhau = model.MatKhau.ToMd5Hash(khachHang.RandomKey);
-                }
-
                 _context.Update(khachHang);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -229,7 +219,6 @@ namespace WebApplication1.Areas.Admin.Controllers
             }
 
         }
-
 
         // GET: Admin/KhachHangAdmin/Delete/5
         public async Task<IActionResult> Delete(string id)
@@ -263,7 +252,6 @@ namespace WebApplication1.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
         private bool KhachHangExists(string id)
         {
             return _context.KhachHangs.Any(e => e.MaKh == id);
